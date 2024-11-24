@@ -20,6 +20,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.with
 
+/*
 @Composable
 fun ToggleVisibilityButton() {
     var isVisible by remember { mutableStateOf(false) }
@@ -41,6 +42,33 @@ fun ToggleVisibilityButton() {
                     .size(100.dp)
                     .background(Color.Red)
             )
+        }
+    }
+}
+*/
+
+@Composable
+fun AnimatedColorBox() {
+    var isBlue by remember { mutableStateOf(true) }
+    val animatedColor by animateColorAsState(
+        targetValue = if (isBlue) Color.Blue else Color.Green,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .size(150.dp)
+                .background(animatedColor)
+                .padding(16.dp)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { isBlue = !isBlue }) {
+            Text(text = "Cambiar color")
         }
     }
 }

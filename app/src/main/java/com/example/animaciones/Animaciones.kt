@@ -46,7 +46,7 @@ fun ToggleVisibilityButton() {
     }
 }
 */
-
+/*
 @Composable
 fun AnimatedColorBox() {
     var isBlue by remember { mutableStateOf(true) }
@@ -69,6 +69,32 @@ fun AnimatedColorBox() {
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { isBlue = !isBlue }) {
             Text(text = "Cambiar color")
+        }
+    }
+}
+*/
+
+@Composable
+fun AnimatedSizeAndPositionBox() {
+    var isExpanded by remember { mutableStateOf(false) }
+    val boxSize by animateDpAsState(targetValue = if (isExpanded) 150.dp else 100.dp)
+    val boxOffsetX by animateDpAsState(targetValue = if (isExpanded) 100.dp else 8.dp)
+    val boxOffsetY by animateDpAsState(targetValue = if (isExpanded) 100.dp else 0.dp)
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .size(boxSize)
+                .offset(x = boxOffsetX, y = boxOffsetY)
+                .background(Color.Red)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { isExpanded = !isExpanded }) {
+            Text(text = if (isExpanded) "Resetear" else "Mover y Agrandar")
         }
     }
 }
